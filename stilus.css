@@ -1,0 +1,30 @@
+@charset "utf-8";
+main{
+    background-color: palevioletred;
+}
+a{
+    border: 1px solid lightblue;
+    
+}
+li{
+    padding: 4px;;
+}
+article{
+    display: grid;
+    grid-template-columns: 200px 200px 200px;
+    grid-template-rows: 200px 200px;
+    grid-gap: 10px;
+}
+article div{
+    border: 1px solid gray;
+}
+article div img{
+    width: 100%;
+    height: auto;
+}
+
+
+
+
+
+
