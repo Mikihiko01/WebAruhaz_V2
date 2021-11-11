@@ -1,46 +1,45 @@
-$(function () {
+$(function(){
+
+
+    const szuloElem = $("article");
+    const sablonElem = $(".aruhaz");
+     
+    var termekTomb = [];
+
     $.ajax(
         {
             url: "termekek.json",
             success: function (result) {
-                console.log(result);
-                console.log("ajax hivásban");
-                megjelenit();
-
+            
+                result.termekek.forEach((value)=>{termekTomb.push(value)});  
+                megjelenit();        
             }
         }
 
-    );
-    /////////////////////Ajax Hívás vége//////////////////////////////////////
+      );
 
-    const szuloElem = $("article");
-    const sablonElem = $(".termék");
-    const kepTomb = {
-
+   function megjelenit(){
+    
+    for (let index = 0; index < termekTomb.length; index++) {
+            const ujElem = sablonElem.clone().appendTo(szuloElem);
+            const adat = termekTomb[index];
+            const galeria = new Termek(adat, ujElem);
     }
 
-    function megjelenit() {
-        for (let index = 0; index < 7; index++) {     
-        const ujElem = sablonElem.clone().appendTo(szuloElem);
-        const termek = new Termek("kepek/kep" + (index + 1) + ".jpg", ujElem);
+    sablonElem.remove();
 
-        }
-        sablonElem.remove();
+    const szuloElem2 = $("section");
+    const sablonElem2 = $(".kosar");
+    sablonElem2.remove();
+    var osszeg = 0;
+    $(window).on("kosarKattintas", (event)=>{
+        
+        const ujElem = sablonElem2.clone().appendTo(szuloElem2);
+        osszeg += event.detail.ar
+        const ujTermek = new Kosar(event.detail.nev, event.detail.ar, osszeg, ujElem);
+    });
+    
+   }
 
-        $(window).on("kosarbaRakja", (event)=>{
-            console.log(event.detail);
-        });
-
-
-
-
-
-
-    }
-
-
-
-})
-
-
-
+});    
+    
